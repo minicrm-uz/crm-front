@@ -3,6 +3,7 @@ import axios, {
   type AxiosRequestConfig,
   type InternalAxiosRequestConfig,
 } from 'axios'
+import { toast } from 'sonner'
 import {
   clearTokens,
   getAccessToken,
@@ -51,6 +52,7 @@ async function refreshAccessToken(): Promise<string | null> {
       })
       .catch(() => {
         clearTokens()
+        toast.error('Your session expired. Please sign in again.')
         return null
       })
       .finally(() => {
